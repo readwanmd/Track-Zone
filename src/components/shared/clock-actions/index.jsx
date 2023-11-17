@@ -2,12 +2,18 @@ import { useState } from 'react';
 import ClockForm from '../clock-form';
 /* eslint-disable react/prop-types */
 
-const ClockActions = ({ local = false, clock, updateClock }) => {
+const ClockActions = ({
+	local = false,
+	clock,
+	updateClock,
+	createClock,
+	deleteClock,
+}) => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [isCreate, setIsCreate] = useState(false);
 
 	const handleClock = (values) => {
-		console.log(values);
+		createClock(values);
 	};
 
 	return (
@@ -16,7 +22,7 @@ const ClockActions = ({ local = false, clock, updateClock }) => {
 			{local ? (
 				<button onClick={() => setIsCreate(!isCreate)}>Create</button>
 			) : (
-				<button>Delete</button>
+				<button onClick={() => deleteClock(clock.id)}>Delete</button>
 			)}
 
 			{isEdit && (
