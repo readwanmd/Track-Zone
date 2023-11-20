@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { formatDistance } from 'date-fns';
 import useClock from '../../hooks/useClock';
+import useTimer from '../../hooks/useTimer';
 import ClockActions from '../shared/clock-actions';
 import ClockDisplay from '../shared/clock-display';
 
 const ClockListItem = ({ clock, updateClock, deleteClock, localClock }) => {
 	const { date } = useClock(clock.timeZone, clock.offset);
+	const timer = useTimer(date);
 
-	if (!date) return null;
+	if (!date || !timer) return null;
 
 	const difrence = formatDistance(date, localClock.date, {
 		addSuffix: true,
@@ -16,7 +18,7 @@ const ClockListItem = ({ clock, updateClock, deleteClock, localClock }) => {
 	return (
 		<div>
 			<ClockDisplay
-				date={date}
+				date={timer}
 				title={clock.title}
 				timeZone={clock.timeZone}
 				offset={clock.offset}
