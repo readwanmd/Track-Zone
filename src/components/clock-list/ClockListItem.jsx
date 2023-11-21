@@ -4,8 +4,16 @@ import useClock from '../../hooks/useClock';
 import useTimer from '../../hooks/useTimer';
 import ClockActions from '../shared/clock-actions';
 import ClockDisplay from '../shared/clock-display';
+import EventActions from '../shared/event-actions';
 
-const ClockListItem = ({ clock, updateClock, deleteClock, localClock }) => {
+const ClockListItem = ({
+	clock,
+	updateClock,
+	deleteClock,
+	localClock,
+	addEvent,
+	allEvents,
+}) => {
 	const { date } = useClock(clock.timeZone, clock.offset);
 	const timer = useTimer(date);
 
@@ -23,13 +31,18 @@ const ClockListItem = ({ clock, updateClock, deleteClock, localClock }) => {
 				timeZone={clock.timeZone}
 				offset={clock.offset}
 				difrence={difrence}
-			/>
-
-			<ClockActions
-				clock={clock}
-				updateClock={updateClock}
-				deleteClock={deleteClock}
-			/>
+			>
+				<ClockActions
+					clock={clock}
+					updateClock={updateClock}
+					deleteClock={deleteClock}
+				/>
+				<EventActions
+					clockId={clock.id}
+					addEvent={addEvent}
+					allEvents={allEvents}
+				/>
+			</ClockDisplay>
 		</div>
 	);
 };

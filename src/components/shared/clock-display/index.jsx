@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
 import classes from './index.module.css';
 
-const ClockDisplay = ({ date, title, timeZone, offset, difrence }) => {
+const ClockDisplay = ({
+	date,
+	title,
+	timeZone,
+	offset,
+	difrence,
+	children,
+}) => {
 	const offsetHr = offset / 60;
 
 	return (
@@ -13,6 +20,8 @@ const ClockDisplay = ({ date, title, timeZone, offset, difrence }) => {
 				{offsetHr > 0 ? `+${Math.abs(offsetHr)}` : `-${Math.abs(offsetHr)}`}
 			</p>
 			<p>{difrence}</p>
+
+			{children}
 		</div>
 	);
 };

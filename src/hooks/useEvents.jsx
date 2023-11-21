@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 const useEvents = () => {
 	const [state, setState] = useState({});
@@ -8,20 +7,22 @@ const useEvents = () => {
 		return Object.keys(state).filter((item) => item.startsWith(clockId));
 	};
 
-	const getEvents = (isArray = false) => {
-		if (!isArray) return state;
-
-		return Object.values(state);
+	const getEvents = () => {
+		return state;
 	};
+	// const getEvents = (isArray = false) => {
+	// 	if (!isArray) return state;
+
+	// 	return Object.values(state);
+	// };
 
 	const addEvent = (event) => {
-		event.id = uuidv4();
-		setState((prev) => ({
-			...prev,
+		setState({
+			...state,
 			[`${event.clockId}|${event.id}`]: event,
-		}));
+		});
 
-		return event;
+		console.log('first', state);
 	};
 
 	const deleteEvent = (id) => {
@@ -47,8 +48,11 @@ const useEvents = () => {
 		setState(events);
 	};
 
+	const e = getEvents();
+	console.log('aaa=>', e);
+
 	return {
-		events: state,
+		state: state,
 		getEventsByClockId,
 		getEvents,
 		addEvent,

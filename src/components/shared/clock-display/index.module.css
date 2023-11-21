@@ -7,4 +7,5 @@
 	overflow: hidden;
 	word-wrap: break-word;
 	text-align: center;
+	z-index: 5;
 }

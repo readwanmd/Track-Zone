@@ -1,0 +1,16 @@
+.modal {
+	min-width: 400px;
+}
+
+.events {
+	padding: 20px;
+}
+.event {
+}
+.event_time {
+	background-color: #fec001;
+}
+
+.no_events {
+	margin: 10px 0;
+}

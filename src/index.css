@@ -9,3 +9,40 @@
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial;
 }
+
+.btn {
+	padding: 0.3rem 1rem;
+	text-align: center;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn:hover {
+	opacity: 0.9;
+}
+
+.btn-edit {
+	background-color: #fec001;
+}
+.btn-info {
+	background-color: #08caf2;
+	color: #fff;
+}
+.btn-create,
+.btn-update {
+	background-color: #1ba345;
+	color: #fff;
+}
+.btn-delete {
+	background-color: #de3e44;
+	color: #fff;
+}
+
+.btn-group {
+	display: flex;
+	gap: 5px;
+	justify-content: center;
+	margin: 10px 0;
+}

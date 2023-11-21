@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import ClockForm from '../clock-form';
+
+import { Modal } from 'react-responsive-modal';
+import 'react-responsive-modal/styles.css';
 /* eslint-disable react/prop-types */
 
 const ClockActions = ({
@@ -16,30 +19,54 @@ const ClockActions = ({
 		createClock(values);
 	};
 
+	const editModal = () => {
+		setIsEdit(!isEdit);
+	};
+	const createModal = () => {
+		setIsCreate(!isCreate);
+	};
+
 	return (
 		<div>
-			<button onClick={() => setIsEdit(!isEdit)}>Edit</button>
-			{local ? (
-				<button onClick={() => setIsCreate(!isCreate)}>Create</button>
-			) : (
-				<button onClick={() => deleteClock(clock.id)}>Delete</button>
-			)}
+			<div className="btn-group">
+				<button onClick={editModal} className="btn btn-edit">
+					Edit
+				</button>
+				{local ? (
+					<button onClick={createModal} className="btn btn-create">
+						Create
+					</button>
+				) : (
+					<button
+						onClick={() => deleteClock(clock.id)}
+						className="btn btn-delete"
+					>
+						Delete
+					</button>
+				)}
+			</div>
 
 			{isEdit && (
 				<>
-					<h3>Edit</h3>
-					<ClockForm
-						values={clock}
-						handleClock={updateClock}
-						title={!local}
-						edit={true}
-					/>
+					<Modal open={isEdit} onClose={editModal} center>
+						<h2>Edit Clock</h2>
+
+						<ClockForm
+							values={clock}
+							handleClock={updateClock}
+							title={!local}
+							edit={true}
+							modal={editModal}
+						/>
+					</Modal>
 				</>
 			)}
 			{isCreate && (
 				<>
-					<h3>Create Clock</h3>
-					<ClockForm handleClock={handleClock} />
+					<Modal open={isCreate} onClose={createModal} center>
+						<h3>Create Clock</h3>
+						<ClockForm handleClock={handleClock} modal={createModal} />
+					</Modal>
 				</>
 			)}
 		</div>
@@ -47,40 +74,3 @@ const ClockActions = ({
 };
 
 export default ClockActions;
-
-{
-	/* <div>
-	<input
-		type="text"
-		value={clock.title}
-		name="title"
-		onChange={handleChange}
-	/>
-	<select
-		name="timeZone"
-		value={clock.timeZone}
-		onChange={handleChange}
-	>
-		<option value="GMT">GMT</option>
-		<option value="UTC">UTC</option>
-		<option value="PST">PST</option>
-		<option value="EST">EST</option>
-		<option value="BST">BST</option>
-		<option value="MST">MST</option>
-	</select>
-
-	{(clock.timeZone === 'GMT' || clock.timeZone === 'UTC') && (
-		<select
-			name="offset"
-			value={clock.offset / 60}
-			onChange={handleChange}
-		>
-			{defaultOffset.map((offset) => (
-				<option key={offset} value={offset}>
-					{offset}
-				</option>
-			))}
-		</select>
-	)}
-</div> */
-}

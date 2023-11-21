@@ -1,0 +1,12 @@
+.clock_list {
+	margin: 2rem 0;
+}
+
+.clock_list h2 {
+	text-align: center;
+	padding-bottom: 1rem;
+}
+
+.clock_list p {
+	text-align: center;
+}

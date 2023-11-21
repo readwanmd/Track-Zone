@@ -2,12 +2,14 @@
 import { useEffect, useState } from 'react';
 import { TIMEZONE_OFFSET } from '../../../constants/timeZone';
 import { getOffset, getTimeZone } from '../../../utils/timeZone';
+import classes from './clock-form.module.css';
 
 const ClockForm = ({
-	values = { title: '', timeZone: 'GMT', offset: 0 },
+	values = { title: '', timeZone: 'GMT', offset: 0, time: '' },
 	handleClock,
 	title = true,
 	edit = false,
+	modal,
 }) => {
 	const [formValues, setFormValues] = useState(values);
 
@@ -35,12 +37,13 @@ const ClockForm = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		handleClock(formValues);
+		modal();
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label htmlFor="title">Enter Title</label>
+		<form onSubmit={handleSubmit} className={classes.form}>
+			<div className={classes.form_group}>
+				<label htmlFor="title">Title</label>
 				<input
 					type="text"
 					name="title"
@@ -50,8 +53,8 @@ const ClockForm = ({
 					disabled={!title}
 				/>
 			</div>
-			<div>
-				<label htmlFor="timeZone">Enter Timezone</label>
+			<div className={classes.form_group}>
+				<label htmlFor="timeZone">Timezone</label>
 
 				<select
 					name="timeZone"
@@ -68,8 +71,8 @@ const ClockForm = ({
 			</div>
 
 			{(formValues.timeZone === 'GMT' || formValues.timeZone === 'UTC') && (
-				<div>
-					<label htmlFor="offset">Enter Offset</label>
+				<div className={classes.form_group}>
+					<label htmlFor="offset">Offset</label>
 					<select
 						name="offset"
 						id="offset"
@@ -85,7 +88,12 @@ const ClockForm = ({
 				</div>
 			)}
 
-			<button type="submit">{edit ? 'Update' : 'Create'}</button>
+			<button
+				type="submit"
+				className={`btn ${edit ? 'btn-update' : 'btn-create'}`}
+			>
+				{edit ? 'Update' : 'Create'}
+			</button>
 		</form>
 	);
 };
