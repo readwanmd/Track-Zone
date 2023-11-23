@@ -20,8 +20,27 @@ const App = () => {
 			...state,
 			[`${event.clockId}|${event.id}`]: event,
 		});
+	};
 
-		console.log('first', state);
+	const deleteEvent = (id) => {
+		const events = { ...state };
+		const id_ = Object.keys(events).filter((a) => a.split('|')[1] === id);
+
+		delete events[id_];
+
+		setState(events);
+	};
+
+	const editEvent = (id, updatedEvent) => {
+		const events = { ...state };
+		const id_ = Object.keys(events).filter((a) => a.split('|')[1] === id);
+
+		events[id_] = {
+			...events[id_],
+			...updatedEvent,
+		};
+
+		setState(events);
 	};
 
 	const updateLocalClock = (data) => {
@@ -68,6 +87,8 @@ const App = () => {
 				deleteClock={deleteClock}
 				addEvent={addEvent}
 				allEvents={state}
+				deleteEvent={deleteEvent}
+				editEvent={editEvent}
 			/>
 		</div>
 	);

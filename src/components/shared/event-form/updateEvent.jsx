@@ -1,13 +1,9 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import classes from '../clock-form/clock-form.module.css';
 
 /* eslint-disable react/prop-types */
-const EventForm = ({
-	clockId,
+const UpdateEvent = ({
 	event = { clockId: '', id: '', title: '', time: '' },
-	addEvent,
-	createEventModal,
 }) => {
 	const [eventValues, setEventValues] = useState({ ...event });
 
@@ -16,17 +12,12 @@ const EventForm = ({
 
 		setEventValues((prev) => ({
 			...prev,
-			clockId,
-			id: uuidv4(),
 			[name]: value,
 		}));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		addEvent(eventValues);
-		createEventModal();
 	};
 
 	return (
@@ -54,9 +45,9 @@ const EventForm = ({
 			</div>
 
 			<button type="submit" className="btn btn-create">
-				Add Event
+				Update Event
 			</button>
 		</form>
 	);
 };
-export default EventForm;
+export default UpdateEvent;

@@ -8,6 +8,8 @@ const ClockList = ({
 	localClock,
 	addEvent,
 	allEvents,
+	deleteEvent,
+	editEvent,
 }) => {
 	return (
 		<div className={classes.clock_list}>
@@ -32,6 +34,8 @@ const ClockList = ({
 							deleteClock={deleteClock}
 							addEvent={addEvent}
 							allEvents={allEvents}
+							deleteEvent={deleteEvent}
+							editEvent={editEvent}
 						/>
 					))}
 				</div>

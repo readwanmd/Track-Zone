@@ -13,6 +13,8 @@ const ClockListItem = ({
 	localClock,
 	addEvent,
 	allEvents,
+	deleteEvent,
+	editEvent,
 }) => {
 	const { date } = useClock(clock.timeZone, clock.offset);
 	const timer = useTimer(date);
@@ -41,6 +43,8 @@ const ClockListItem = ({
 					clockId={clock.id}
 					addEvent={addEvent}
 					allEvents={allEvents}
+					deleteEvent={deleteEvent}
+					editEvent={editEvent}
 				/>
 			</ClockDisplay>
 		</div>
