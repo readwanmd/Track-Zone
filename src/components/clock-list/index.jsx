@@ -1,16 +1,7 @@
 import ClockListItem from './ClockListItem';
 import classes from './index.module.css';
 /* eslint-disable react/prop-types */
-const ClockList = ({
-	clocks,
-	updateClock,
-	deleteClock,
-	localClock,
-	addEvent,
-	allEvents,
-	deleteEvent,
-	editEvent,
-}) => {
+const ClockList = ({ clocks, updateClock, deleteClock, localClock }) => {
 	return (
 		<div className={classes.clock_list}>
 			<h2>Other Clocks</h2>
@@ -32,10 +23,6 @@ const ClockList = ({
 							localClock={localClock}
 							updateClock={updateClock}
 							deleteClock={deleteClock}
-							addEvent={addEvent}
-							allEvents={allEvents}
-							deleteEvent={deleteEvent}
-							editEvent={editEvent}
 						/>
 					))}
 				</div>

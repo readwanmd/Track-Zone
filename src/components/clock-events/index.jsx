@@ -14,7 +14,7 @@ const ClockEvents = ({
 	editEvent,
 }) => {
 	const [editModal, setEditModal] = useState(false);
-	const [updatedEvent, setUpdatedEvent] = useState({
+	const [event, setEevent] = useState({
 		clockId: '',
 		id: '',
 		title: '',
@@ -28,8 +28,8 @@ const ClockEvents = ({
 		setEditModal(!editModal);
 	};
 
-	const handleUpdate = (event) => {
-		console.log(event);
+	const handleEventPass = (item) => {
+		setEevent(item);
 
 		handleEditModal();
 	};
@@ -61,7 +61,10 @@ const ClockEvents = ({
 										marginLeft: 'auto',
 									}}
 								>
-									<button onClick={() => handleUpdate(item)} className={'btn'}>
+									<button
+										onClick={() => handleEventPass(item)}
+										className={'btn'}
+									>
 										<img
 											style={{ width: '1rem' }}
 											src="https://i.postimg.cc/GH6rLwy0/icons8-inscription-48.png"
@@ -82,7 +85,11 @@ const ClockEvents = ({
 								<Modal open={editModal} onClose={handleEditModal} center>
 									<h3>Event Edit</h3>
 
-									<UpdateEvent />
+									<UpdateEvent
+										event={event}
+										editEvent={editEvent}
+										handleEditModal={handleEditModal}
+									/>
 								</Modal>
 							</li>
 						))}

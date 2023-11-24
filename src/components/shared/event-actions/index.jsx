@@ -2,19 +2,15 @@ import { useState } from 'react';
 
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
+import useEvents from '../../../hooks/useEvents';
 import ClockEvents from '../../clock-events';
 import EventForm from '../event-form';
 /* eslint-disable react/prop-types */
 
-const EventActions = ({
-	clockId,
-	addEvent,
-	allEvents,
-	deleteEvent,
-	editEvent,
-}) => {
+const EventActions = ({ clockId }) => {
 	const [isShowEvent, setIsShowEvent] = useState(false);
 	const [isCreateEvent, setIsCreateEvent] = useState(false);
+	const { addEvent, allEvents, deleteEvent, editEvent } = useEvents();
 
 	const showEventModal = () => {
 		setIsShowEvent(!isShowEvent);

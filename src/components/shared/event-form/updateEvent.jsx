@@ -2,11 +2,9 @@ import { useState } from 'react';
 import classes from '../clock-form/clock-form.module.css';
 
 /* eslint-disable react/prop-types */
-const UpdateEvent = ({
-	event = { clockId: '', id: '', title: '', time: '' },
-}) => {
+const UpdateEvent = ({ event, editEvent, handleEditModal }) => {
 	const [eventValues, setEventValues] = useState({ ...event });
-
+	// console.log('UpdateEvent:', event);
 	const handleChange = (e) => {
 		let { name, value } = e.target;
 
@@ -18,6 +16,8 @@ const UpdateEvent = ({
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		editEvent(event.id, eventValues);
+		handleEditModal();
 	};
 
 	return (

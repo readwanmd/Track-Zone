@@ -6,16 +6,7 @@ import ClockActions from '../shared/clock-actions';
 import ClockDisplay from '../shared/clock-display';
 import EventActions from '../shared/event-actions';
 
-const ClockListItem = ({
-	clock,
-	updateClock,
-	deleteClock,
-	localClock,
-	addEvent,
-	allEvents,
-	deleteEvent,
-	editEvent,
-}) => {
+const ClockListItem = ({ clock, updateClock, deleteClock, localClock }) => {
 	const { date } = useClock(clock.timeZone, clock.offset);
 	const timer = useTimer(date);
 
@@ -39,13 +30,7 @@ const ClockListItem = ({
 					updateClock={updateClock}
 					deleteClock={deleteClock}
 				/>
-				<EventActions
-					clockId={clock.id}
-					addEvent={addEvent}
-					allEvents={allEvents}
-					deleteEvent={deleteEvent}
-					editEvent={editEvent}
-				/>
+				<EventActions clockId={clock.id} />
 			</ClockDisplay>
 		</div>
 	);

@@ -1,20 +1,7 @@
 import { useState } from 'react';
-
+import { toast } from 'react-toastify';
 const useEvents = () => {
 	const [state, setState] = useState({});
-
-	const getEventsByClockId = (clockId) => {
-		return Object.keys(state).filter((item) => item.startsWith(clockId));
-	};
-
-	const getEvents = () => {
-		return state;
-	};
-	// const getEvents = (isArray = false) => {
-	// 	if (!isArray) return state;
-
-	// 	return Object.values(state);
-	// };
 
 	const addEvent = (event) => {
 		setState({
@@ -22,43 +9,48 @@ const useEvents = () => {
 			[`${event.clockId}|${event.id}`]: event,
 		});
 
-		console.log('first', state);
+		toast.success('Event created!', {
+			position: toast.POSITION.TOP_CENTER,
+			autoClose: 1000,
+		});
 	};
 
 	const deleteEvent = (id) => {
 		const events = { ...state };
-		delete events[id];
+		const id_ = Object.keys(events).filter((a) => a.split('|')[1] === id);
+
+		delete events[id_];
+
 		setState(events);
+
+		toast.error('Event Deleted!', {
+			position: toast.POSITION.TOP_CENTER,
+			autoClose: 1000,
+		});
 	};
 
-	const deleteEventsByClockId = (clockId) => {
-		const events = Object.keys(state).filter(
-			(item) => !item.startsWith(clockId)
-		);
-		setState(events);
-	};
-
-	const updateEvent = (updatedEvent, id) => {
+	const editEvent = (id, updatedEvent) => {
 		const events = { ...state };
-		events[id] = {
-			...events[id],
+		const id_ = Object.keys(events).filter((a) => a.split('|')[1] === id);
+
+		events[id_] = {
+			...events[id_],
 			...updatedEvent,
 		};
 
 		setState(events);
+
+		toast.success('Event updated!', {
+			position: toast.POSITION.TOP_CENTER,
+			autoClose: 1000,
+		});
 	};
 
-	const e = getEvents();
-	console.log('aaa=>', e);
-
 	return {
-		state: state,
-		getEventsByClockId,
-		getEvents,
+		allEvents: state,
 		addEvent,
 		deleteEvent,
-		deleteEventsByClockId,
-		updateEvent,
+		editEvent,
 	};
 };
 export default useEvents;
