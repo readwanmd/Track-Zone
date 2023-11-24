@@ -10,8 +10,21 @@ This application has the capacity to save meeting times according to particular 
 
 - The system clock will be user's local clock and local can’t be deleted only edited
 - user can create as many clocks as they want
+
   - every clock has its title
   - own timezone
   - events with a time
   - time difference with a base clock
   - user can edit or delete the clock as well as clocks events
+
+  ## Wireframes
+
+  ![wireframe](src/assets/readme-asstes/wireframe.png)
+
+  ## Component-tree
+
+  ![component-tree](src/assets/readme-asstes/component-tree.png)
+
+## Screenshot
+
+![screenshot](src/assets/readme-asstes/screencapture1.png)
